@@ -56,6 +56,8 @@ def show_upload_form(request: Request):
 async def upload_file(request: Request, file: UploadFile = File(...)):
     content = await file.read()
 
+    os.makedirs(UPLOAD_DIR, exist_ok=True)
+
     file_path = os.path.join(UPLOAD_DIR, file.filename)
     with open(file_path, "wb") as f:
         f.write(content)
