@@ -12,11 +12,12 @@ UPLOAD_DIR = "uploads"
 
 
 @app.get("/")
-def home():
-    return JSONResponse(
-        content={"message": "Hello, World!"},
-        media_type="application/json; charset=utf-8"
+def home(request: Request):
+    return templates.TemplateResponse(
+        name="index.html",
+        context={"request": request}
     )
+
 
 
 @app.get("/greet/{name}")
